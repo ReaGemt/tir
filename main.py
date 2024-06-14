@@ -1,3 +1,4 @@
+import game
 import pygame
 import random
 
@@ -18,11 +19,24 @@ target_height = 80
 target_x = random.randint(0, SCREEN_WIDTH - target_widht)
 target_y = random.randint(0, SCREEN_HEIGHT - target_height)
 
+score = 0
+font = pygame.font.Font(None, 38)
+
 color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
 
 running = True
+clock = pygame.time.Clock()
+
+start_time = pygame.time.get_ticks()
+game_timer = 30  # 30 секунд на игру
+
 while running:
     screen.fill(color)
+
+    current_time = pygame.time.get_ticks()
+    time_elapsed = (current_time - start_time) // 1000
+    game_timer = max(0, 30 - time_elapsed)
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -32,6 +46,14 @@ while running:
                 target_x = random.randint(0, SCREEN_WIDTH  - target_widht)
                 target_y = random.randint(0, SCREEN_HEIGHT - target_height)
     screen.blit(target_img, (target_x, target_y))
+
+    text = font.render(f"Score: {score} Time: {int(game_timer)}", True, (255, 255, 255))
+    screen.blit(text,  (10, 10))
+
     pygame.display.update()
+    clock.tick(60)
+
+    if game_timer <= 0:
+        running = False
 
 pygame.quit()
