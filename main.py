@@ -3,25 +3,25 @@ import random
 
 pygame.init()
 
-# Screen dimensions
+# Размеры экрана
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-# Window title and icon
+# Заголовок окна и иконка
 pygame.display.set_caption('Игра Тир')
 icon = pygame.image.load('img/icon.png')
 pygame.display.set_icon(icon)
 
-# Load target image
+# Загрузка изображения мишени
 target_img = pygame.image.load("img/target.png")
 target_width = 80
 target_height = 80
 
-# Initialize font
+# Инициализация шрифта
 font = pygame.font.Font(None, 38)
 
-# Game settings
+# Настройки игры
 clock = pygame.time.Clock()
 game_duration = 30  # 30 seconds for the game
 
@@ -30,6 +30,7 @@ def update_target_position():
     target_x = random.randint(0, SCREEN_WIDTH - target_width)
     target_y = random.randint(0, SCREEN_HEIGHT - target_height)
 
+# Обновление для сброса переменных
 def reset_game():
     global target_x, target_y, score, start_time, color, running, game_over
     target_x = random.randint(0, SCREEN_WIDTH - target_width)
@@ -40,13 +41,14 @@ def reset_game():
     running = True
     game_over = False
 
+# Кнопка
 def draw_button(text, x, y, width, height):
     pygame.draw.rect(screen, (0, 0, 0), [x, y, width, height])
     button_text = font.render(text, True, (255, 255, 255))
     screen.blit(button_text, (x + (width - button_text.get_width()) // 2, y + (height - button_text.get_height()) // 2))
     return pygame.Rect(x, y, width, height)
 
-# Initialize game variables
+# Инициализация игровых переменных
 reset_game()
 
 while True:
