@@ -21,7 +21,6 @@ target_y = random.randint(0, SCREEN_HEIGHT - target_height)
 
 color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
 
-12
 running = True
 while running:
     pass
